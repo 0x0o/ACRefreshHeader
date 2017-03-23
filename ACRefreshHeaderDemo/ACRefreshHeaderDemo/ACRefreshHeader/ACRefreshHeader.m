@@ -18,6 +18,9 @@
 @property (weak, nonatomic) UILabel *statusTextLabel; // 刷新状态的Label
 
 @property (nonatomic, getter=isRefreshing) BOOL refreshing;
+
+@property (copy, nonatomic) ACRefreshingBlock refreshingBlock;
+
 @end
 
 
@@ -131,7 +134,17 @@
             }
             _scrollView.contentInset = UIEdgeInsetsMake(_headerBackgroundViewH*1.3, 0, 0, 0);
         }];
+        
+        if (self.refreshingBlock) {
+            self.refreshingBlock();
+        }
     }
+}
+
+
+- (void)startRefreshingWithBlock:(ACRefreshingBlock)block {
+    self.refreshingBlock = block;
+    [self startRefreshing];
 }
 
 

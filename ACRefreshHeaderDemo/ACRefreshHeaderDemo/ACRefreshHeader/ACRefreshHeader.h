@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^ACRefreshingBlock)();
 @interface ACRefreshHeader : UIView
 
 - (instancetype)initWithScrollView:(UIScrollView *)scrollView;
 - (void)startRefreshing;
 - (void)stopRefreshing;
+
+- (void)startRefreshingWithBlock:(ACRefreshingBlock)block;
 @end
